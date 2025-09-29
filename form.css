@@ -1,3 +1,4 @@
+
   .titulldiv{
             background-color: #fac2f1;
             width: 100%;
@@ -122,4 +123,129 @@
 
         #pastroBtn:hover {
             background-color: #aa0591;
+
+  .titulldiv{
+            background-color: #fac2f1;
+            width: 100%;
+            flex-wrap: wrap;
         }
+        h1 {
+            font-family: 'Times New Roman', Times, serif;
+            text-align: center;
+            color: #c514ab;
+        }
+
+        body {
+            background-color: #fceaf4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #main-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 40px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        #formdiv {
+            background-color: #ede2ed;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(29, 19, 26, 0.2);
+        }
+
+        #tabeladiv {
+            background-color: #ede2ed;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(29, 19, 26, 0.2);
+        }
+
+        #form {
+            width: 400px;
+        }
+
+        label {
+            font-size: 18px;
+            display: inline-block;
+            width: 120px;
+            margin-bottom: 10px;
+            color: #100a0f;
+            text-align:left;
+            margin-right: 10px;
+        }
+
+        input[type="number"] {
+            color: #151415;
+            width: calc(100% - 1px);
+            padding: 7px;
+            margin-bottom: 10px;
+            border: 1px solid #cecaca;
+            border-radius: 6px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #c514ab;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 17px;
+        }
+
+        button:hover {
+            background-color: #aa0591;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        table, th, td {
+            border: 1px solid #dad7d7;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f5eef5;
+            color: #100a0f;
+        }
+
+        .total-row {
+            font-weight: bold;
+            background-color: #f9f3f9;
+        }
+
+        #pastroBtn {
+            display: block;
+            width: 100%;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #c514ab;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 17px;
+        }
+
+        #pastroBtn:hover {
+            background-color: #aa0591;
+  }
