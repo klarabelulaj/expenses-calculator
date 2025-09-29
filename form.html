@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Llogarites Shpenzimesh</title>
+    <style>
+        .titulldiv{
+            background-color: #fac2f1;
+            width: 100%;
+            flex-wrap: wrap;
+        }
+        h1 {
+            font-family: 'Times New Roman', Times, serif;
+            text-align: center;
+            color: #c514ab;
+        }
+
+        body {
+            background-color: #fceaf4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #main-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 40px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        #formdiv {
+            background-color: #ede2ed;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(29, 19, 26, 0.2);
+        }
+
+        #tabeladiv {
+            background-color: #ede2ed;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(29, 19, 26, 0.2);
+        }
+
+        #form {
+            width: 400px;
+        }
+
+        label {
+            font-size: 18px;
+            display: inline-block;
+            width: 120px;
+            margin-bottom: 10px;
+            color: #100a0f;
+            text-align:left;
+            margin-right: 10px;
+        }
+
+        input[type="number"] {
+            color: #151415;
+            width: calc(100% - 1px);
+            padding: 7px;
+            margin-bottom: 10px;
+            border: 1px solid #cecaca;
+            border-radius: 6px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #c514ab;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 17px;
+        }
+
+        button:hover {
+            background-color: #aa0591;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        table, th, td {
+            border: 1px solid #dad7d7;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f5eef5;
+            color: #100a0f;
+        }
+
+        .total-row {
+            font-weight: bold;
+            background-color: #f9f3f9;
+        }
+
+        #pastroBtn {
+            display: block;
+            width: 100%;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #c514ab;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 17px;
+        }
+
+        #pastroBtn:hover {
+            background-color: #aa0591;
+        }
+    </style>
+</head>
+<body>
+    <div class="titulldiv">
+    <h1>Llogaritesi i Shpenzimeve Mujore!</h1>
+    </div>
+     <!-- Krijimi i formes me fushat perkatese te zhpenzimeve ne menyre qe perdoruesi te 
+      vendosi vlerat-->
+    <div id="main-container">
+        <div id="formdiv">
+            <form id="form">
+                <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                    <label for="qera">Qera:</label>
+                    <input type="number" id="qera" placeholder="Shpenzimi për qera:" min="0" required>
+                </div>
+
+                <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                    <label for="ushqimet">Ushqim:</label>
+                    <input type="number" id="ushqimet" placeholder="Shpenzimet e ushqimit:" min="0" required>
+                </div>
+
+                <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                    <label for="transport">Transport:</label>
+                    <input type="number" id="transport" placeholder="Shpenzimet për transport:" min="0" required>
+                </div>
+
+                <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                    <label for="tjera">Të tjera:</label>
+                    <input type="number" id="tjera" placeholder="Shpenzimet për gjëra të tjera:" min="0" required>
+                </div>
+
+                <button type="button" onclick="shtoShpenzim()">Shto Shpenzime</button>
+            </form>
+        </div>
+           <!-- Krijimi i tabeles me vlerat e shpenzimeve te marra nga perdoruesi -->
+        <div id="tabeladiv">
+            <table id="tabelaShpenzimeve">
+                <thead>
+                    <tr>
+                        <th>Lloji i Shpenzimit</th>
+                        <th>Shuma</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!--Ketu vendosen vlerat -->
+                </tbody>
+                <tfoot>
+                    <tr class="total-row">
+                        <td>Totali:</td>
+                        <td id="totali">0.00</td>
+                    </tr>
+                </tfoot>
+            </table>
+            <button id="pastroBtn" onclick="pastroTeGjitha()">Pastro të gjitha</button>
+        </div>
+    </div>
+
+    <script>
+        let total = 0;
+       // Ky funksion merret me shtimin e shpenzimeve në tabelë dhe përditësimin e totalit të shpenzimeve.
+       //parseFloat(): E perdorim për të marrë vlerat nga inputet(qera, ushqim, transport, tjera) 
+       //dhe i kthen ato në numra me presje dhjetore.
+       // Nëse përdoruesi nuk vendos asnje vlere, vlera 0 do të përdoret ne vend te saj.
+        function shtoShpenzim() {
+            const qera = parseFloat(document.getElementById("qera").value) || 0;
+            const ushqim = parseFloat(document.getElementById("ushqimet").value) || 0 ;
+            const transport = parseFloat(document.getElementById("transport").value) || 0 ;
+            const tjera = parseFloat(document.getElementById("tjera").value) || 0;
+
+            // Bejme verifikimin e plotësimit të të gjitha fushave
+            if (qera === 0 || ushqim === 0 || transport === 0 || tjera === 0) {
+                alert("Ju lutem plotesoni fushat me shpenzimet perkatese");
+                return;
+            }
+            //Kap tabelën (tabelaShpenzimeve) dhe vendos vlerat për secilën kategori shpenzimi si rreshta në tabelë,
+            // duke kontrolluar nëse shuma është më e madhe se 0.
+            const tabelaBody = document.getElementById("tabelaShpenzimeve").getElementsByTagName("tbody")[0];
+
+            function shtoRresht(lloji, shuma) {
+                if (shuma > 0) {
+                    const rresht = tabelaBody.insertRow();
+                    rresht.insertCell(0).innerText = lloji;
+                    rresht.insertCell(1).innerText = shuma.toFixed(2);
+                }
+            }
+            //thirrja e funksionit per te shtuar cdo kategori shpenzimi
+            shtoRresht("Qera", qera);
+            shtoRresht("Ushqim", ushqim);
+            shtoRresht("Transport", transport);
+            shtoRresht("Të tjera", tjera);
+
+            //llogaritja e totalit te shpenzimeve
+            total += qera + ushqim + transport + tjera;
+            document.getElementById("totali").innerText = total.toFixed(2);
+
+            //pastrimi i fushave te formes
+            document.getElementById("form").reset();
+        }
+        //funksioni qe pastron elementet e tabeles dhe duke e kthyer perseri totalin zero
+        function pastroTeGjitha() {
+            const tabelaBody = document.getElementById("tabelaShpenzimeve").getElementsByTagName("tbody")[0];
+            tabelaBody.innerHTML = "";
+            total = 0;
+            document.getElementById("totali").innerText = total.toFixed(2);
+        }
+    </script>
+</body>
+</html>
